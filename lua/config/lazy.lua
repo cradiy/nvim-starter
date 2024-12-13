@@ -70,6 +70,56 @@ require("lazy").setup({
         },
       },
     },
+    {
+      "folke/noice.nvim",
+      opts = {
+        lsp = {
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+        },
+        routes = {
+          {
+            filter = {
+              any = {
+                { find = "%d+l, %d+b" },
+                { find = "; after #%d+" },
+                { find = "; before #%d+" },
+              },
+            },
+            view = "mini",
+          },
+          {
+            filter = {
+              event = "notify",
+              any = {
+                { find = ".*information.*" },
+                { find = ".*runtime/lua/vim/lsp/client.lua.*" },
+              },
+            },
+            opts = { skip = true },
+          },
+          {
+            filter = {
+              event = "notify",
+              kind = "error",
+              any = {
+                { find = ".*E21.*" },
+                { find = ".*-32802.*" },
+              },
+            },
+            opts = { skip = true },
+          },
+        },
+        presets = {
+          bottom_search = true,
+          command_palette = true,
+          long_message_to_split = true,
+        },
+      },
+    },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.

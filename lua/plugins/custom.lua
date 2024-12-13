@@ -15,17 +15,17 @@ return {
     end,
   },
   { "akinsho/toggleterm.nvim", version = "*" },
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- add any options here
-    },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     -- add any options here
+  --   },
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "rcarriga/nvim-notify",
+  --   },
+  -- },
   {
     "MagicDuck/grug-far.nvim",
     config = function()
@@ -68,17 +68,19 @@ return {
           },
           wo = {},
           keys = {
+
             term_normal = {
-              "<esc>",
+              "<C-[>",
               function(self)
-                self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
-                if self.esc_timer:is_active() then
-                  self.esc_timer:stop()
-                  vim.cmd("stopinsert")
-                else
-                  self.esc_timer:start(200, 0, function() end)
-                  return "<esc>"
-                end
+                vim.cmd("stopinsert")
+                -- self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
+                -- if self.esc_timer:is_active() then
+                --   self.esc_timer:stop()
+                --   vim.cmd("stopinsert")
+                -- else
+                --   self.esc_timer:start(200, 0, function() end)
+                --   return "<esc>"
+                -- end
               end,
               mode = "t",
               expr = true,
@@ -110,5 +112,16 @@ return {
     end,
     -- use opts = {} for passing setup options
     -- this is equivalent to setup({}) function
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      file_types = { "markdown", "copilot-chat" },
+    },
   },
 }
