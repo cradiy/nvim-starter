@@ -2,18 +2,18 @@ return {
   {
     "lewis6991/gitsigns.nvim",
   },
-  {
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.8",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("telescope").setup({
-        defaults = {
-          file_ignore_patterns = { "target", ".git", "node_modules", "build", "dist" },
-        },
-      })
-    end,
-  },
+  -- {
+  --   "nvim-telescope/telescope.nvim",
+  --   tag = "0.1.8",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   config = function()
+  --     require("telescope").setup({
+  --       defaults = {
+  --         file_ignore_patterns = { "target", ".git", "node_modules", "build", "dist" },
+  --       },
+  --     })
+  --   end,
+  -- },
   { "akinsho/toggleterm.nvim", version = "*" },
   -- {
   --   "folke/noice.nvim",
@@ -68,19 +68,10 @@ return {
           },
           wo = {},
           keys = {
-
             term_normal = {
-              "<C-[>",
+              "<C-]>",
               function(self)
                 vim.cmd("stopinsert")
-                -- self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
-                -- if self.esc_timer:is_active() then
-                --   self.esc_timer:stop()
-                --   vim.cmd("stopinsert")
-                -- else
-                --   self.esc_timer:start(200, 0, function() end)
-                --   return "<esc>"
-                -- end
               end,
               mode = "t",
               expr = true,
@@ -123,5 +114,19 @@ return {
     opts = {
       file_types = { "markdown", "copilot-chat" },
     },
+  },
+  {
+    "eero-lehtinen/oklch-color-picker.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      -- One handed keymap recommended, you will be using the mouse
+      { "<leader>v", "<cmd>ColorPickOklch<cr>", desc = "Color pick under cursor" },
+    },
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
   },
 }
